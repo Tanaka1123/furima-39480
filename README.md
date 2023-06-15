@@ -14,6 +14,7 @@
 
 ### Association
 - has_many :items
+- has_many :oders
 
 ## itemsテーブル
 | Column             | Type       | Option                         |
@@ -31,3 +32,21 @@
 
 ### Association
 - belongs_to :user
+- has_one :order
+
+## odersテーブル
+
+
+|Column          |Type	     |Option                         |
+|----------------|-----------|-------------------------------|
+|id(PK)	         |integer	   |null: false                    |
+|user_id(FK)	   |integer	   |null: false, foreign_key: true |
+|item_id(FK)	   |integer	   |null: false, foreign_key: true |
+|purchase_date	 |datetime   |null: false                    |
+|purchase_price  |decimal	   |precision: 10, scale: 2        |
+|payment_status	 |string     |null: false                    |
+|delivery_status |string	   |null: false                    |
+
+Association
+- belongs_to :user
+- belongs_to :item
