@@ -14,7 +14,7 @@
 
 ### Association
 - has_many :items
-- has_many :oders
+- has_many :orders
 
 ## itemsテーブル
 | Column             | Type       | Option                         |
@@ -50,3 +50,19 @@
 Association
 - belongs_to :user
 - belongs_to :item
+
+## shippingaddressesテーブル
+
+|Column	       |Type   |Option                        | 
+|--------------|-------|------------------------------|
+|id(PK)        |integer|null: false                   |
+|order_id(FK)  |integer|null: false, foreign_key: true|
+|postal_code   |string |null: false                   |
+|prefecture	   |string |null: false                   |
+|city	         |string |null: false                   |
+|house_number  |string |null: false                   |
+|building_name |string |	                            |
+|phone_number  |string |null: false                   | 
+
+Association
+belongs_to :order
