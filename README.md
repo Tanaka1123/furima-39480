@@ -33,8 +33,9 @@
 ### Association
 - belongs_to :user
 - has_one :order
+- has_many :shipping_addresses, through: :orders
 
-## odersテーブル
+## ordersテーブル
 
 
 |Column          |Type	     |Option                         |
