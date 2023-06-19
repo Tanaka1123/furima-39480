@@ -2,30 +2,25 @@ class OrdersController < ApplicationController
 
   def index
     @order = Order.new
-  end
-
-  def new
-    @order = Order.new
-     @item = Item.find(params[:item_id])
-    # 必要なデータを設定するなどの処理を追加することもあります
+    @item = Item.last
+     @order_address = OrderAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
-    # 注文作成のロジックを実装します
-    if @order.save
-      # 注文が保存された場合の処理
-      redirect_to root_path, notice: "注文が完了しました。"
+    @order_address = OrderAddress.new(order_params)
+    if @order_address.valid?
+       @order_address.save
+      redirect_to root_path
     else
-      # 注文が保存されなかった場合の処理
-      render :new, status: :unprocessable_entity
+      @item = Item.last
+      render :index, status: :unprocessable_entity
     end
   end
 
   private
 
   def order_params
-    # 注文作成時に許可するパラメータを指定します
-    params.require(:order).permit(:user_id, :item_id, :purchase_date, :purchase_price, :payment_status, :delivery_status)
+    params.require(:order_address).permit(:item_id, :postal_code, :prefecture, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id)
   end
+
 end
