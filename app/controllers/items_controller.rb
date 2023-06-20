@@ -19,9 +19,13 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @order = Order.new
+    @sold_out = current_user && Order.exists?(user_id: current_user.id, item_id: @item.id)
+    
   end
 
   def edit
+    redirect_to root_path if @item.orders.exists?
   end
 
   def update

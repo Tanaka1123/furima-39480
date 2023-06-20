@@ -11,9 +11,6 @@ class OrderAddress
     validates :phone_number, presence: { message: "can't be blank" }, length: { minimum: 10, message: "is too short" }, numericality: { only_integer: true, message: "is invalid. Input only numbers" }
   end
   validates :prefecture, numericality: {other_than: 0, message: "can't be blank"}
-
-
-  
   
   def save
 
