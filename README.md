@@ -33,7 +33,6 @@
 ### Association
 - belongs_to :user
 - has_one :order
-- has_many :shipping_addresses, through: :orders
 
 ## ordersテーブル
 
@@ -41,29 +40,27 @@
 |Column          |Type	     |Option                         |
 |----------------|-----------|-------------------------------|
 |id(PK)	         |integer	   |null: false                    |
-|user_id(FK)	   |integer	   |null: false, foreign_key: true |
-|item_id(FK)	   |integer	   |null: false, foreign_key: true |
-|purchase_date	 |datetime   |null: false                    |
-|purchase_price  |decimal	   |precision: 10, scale: 2        |
-|payment_status	 |string     |null: false                    |
-|delivery_status |string	   |null: false                    |
+|user_id(FK)	   |references |null: false, foreign_key: true |
+|item_id(FK)	   |references |null: false, foreign_key: true |
+
 
 Association
 - belongs_to :user
 - belongs_to :item
+- has_one :shippingaddress
 
 ## shippingaddressesテーブル
 
-|Column	       |Type   |Option                        | 
-|--------------|-------|------------------------------|
-|id(PK)        |integer|null: false                   |
-|order_id(FK)  |integer|null: false, foreign_key: true|
-|postal_code   |string |null: false                   |
-|prefecture	   |string |null: false                   |
-|city	         |string |null: false                   |
-|house_number  |string |null: false                   |
-|building_name |string |	                            |
-|phone_number  |string |null: false                   | 
+|Column	       |Type      |Option                        | 
+|--------------|----------|------------------------------|
+|id(PK)        |integer   |null: false                   |
+|order_id(FK)  |references|null: false, foreign_key: true|
+|postal_code   |string    |null: false                   |
+|prefecture_id |integer   |null: false                   |
+|city	         |string    |null: false                   |
+|house_number  |string    |null: false                   |
+|building_name |string    |	                            |
+|phone_number  |string    |null: false                   | 
 
 Association
 belongs_to :order

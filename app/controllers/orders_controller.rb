@@ -1,17 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :authorize_order!, only: [:index, :create]
+  before_action :set_order_address, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @order = Order.new
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
   end
 
   def create
     @order_address = OrderAddress.new(order_params)
-    @item = Item.find(params[:item_id])
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -38,11 +36,15 @@ class OrdersController < ApplicationController
     )
   end
 
+  def set_order_address
+  @item = Item.find(params[:item_id])
+  end
+
   def authorize_order!
     @item = Item.find(params[:item_id])
     if @item.user == current_user
       redirect_to root_path, alert: 'You are not authorized to perform this action.'
-    elsif @item.orders.exists?
+    elsif @item.order
       redirect_to root_path, alert: 'This item has already been purchased.'
     end
   end

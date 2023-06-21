@@ -8,7 +8,7 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image, class: "item-box-img" %>
-   <% if @item.orders.exists? %>
+   <% if @item.order %>
         <div class='sold-out'>
           <span>Sold Out!!</span>
         </div>
@@ -24,18 +24,18 @@
     </div>
 <% if user_signed_in? %>
   <% if current_user.id == @item.user_id %>
-    <% unless @item.orders.exists? %>
+    <% unless @item.order %>
       <%= link_to '商品の編集', edit_item_path(@item), method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', item_path(@item), method: :delete, data: { turbo_method: :delete }, class: 'item-destroy' %>
     <% end %>
   <% else %>
-    <% if @item.orders.blank? %>
+    <% if @item.order.blank? %>
       <%= link_to '購入画面に進む', item_orders_path(item_id: @item.id), class: 'item-red-btn' %>
     <% end %>
   <% end %>
 <% else %>
-  <% if @item.orders.blank? && user_signed_in? %>
+  <% if @item.order.blank? && user_signed_in? %>
     <%= link_to '購入画面に進む', item_orders_path(item_id: @item.id), class: 'item-red-btn' %>
   <% end %>
 <% end %>
