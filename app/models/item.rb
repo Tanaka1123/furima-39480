@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   belongs_to :shipping_charge
   belongs_to :prefecture
   belongs_to :shipping_date
-  
 
   with_options presence: true do
     validates :name
@@ -29,6 +28,4 @@ class Item < ApplicationRecord
     validates :shipping_date_id
     validates :prefecture_id
   end
-    
-    
-  end
+end
