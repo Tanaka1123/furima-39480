@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   end
 
   def set_order_address
-  @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
   end
 
   def authorize_order!
