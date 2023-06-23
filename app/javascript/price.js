@@ -1,4 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById('new-item-price')
+
+ // 購入ページのみコードを読み込むための条件分岐
+  if (!form) return null;
   if ( document.getElementById('item-price')!= null) {
     const priceInput = document.getElementById("item-price");
     const addTaxDom = document.getElementById("add-tax-price");
