@@ -1,5 +1,5 @@
 let payjp;
-
+console.log("test");
 const initializePayjp = () => {
 
   // gonが定義されているか否かの条件分岐
