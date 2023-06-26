@@ -227,3 +227,15 @@
 .inc {
   font-size: 13px;
 }
+
+/**画像プレビュー**/
+
+.preview {
+  width: 200px; /* Set the desired width */
+  height: auto; /* Adjust the height automatically to maintain aspect ratio */
+}
+
+.preview-image {
+  max-width: 100%; /* Ensure the image fits within the parent container */
+  max-height: 100%; /* Ensure the image fits within the parent container */
+}
